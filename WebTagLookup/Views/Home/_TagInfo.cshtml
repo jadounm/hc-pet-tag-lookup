@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebTagLookup.Models.TagData>
+
+<style type="text/css">
+    .pagination li:hover {
+        cursor: pointer;
+    }
+    .table {
+        font-size: 13px !important;
+    }
+    </style>
+
+@if (Model == null || Model.Count() == 0)
+{
+    <span class="alert-info">Your search returned no results. Please make sure your search string follows the format outlined above or contact Pet Resources at (813) 744-5560.</span>
+}
+else
+{    
+    <table id="tagInfo" class="table table-bordered table-condensed table-hover table-striped">
+        <tr>
+            <th>Licnese #</th>
+            <th>Microchip #</th>
+            <th>Owner Name</th>
+            <th>Phone Number</th>
+            <th>Pet Name</th>
+            <th>Animal Type</th>
+            <th>Breed</th>
+            <th>Vaccination Expiration</th>
+            <th>Tag Expiration</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => item.TagNo)</td>
+                <td>@Html.DisplayFor(m => item.MicroNo)</td>
+                <td>@Html.DisplayFor(m => item.OwnerName)</td>
+                <td>@Html.DisplayFor(m => item.Phone)</td>
+                <td>@Html.DisplayFor(m => item.PetName)</td>
+                <td>@Html.DisplayFor(m => item.PetType)</td>
+                <td>@Html.DisplayFor(m => item.Breed)</td>
+                <td>@Html.DisplayFor(m => item.VacExpDate)</td>
+                <td>@Html.DisplayFor(m => item.TagExpDate)</td>
+            </tr>
+        }
+    </table>
+
+    <div class='pagination-container'>
+        <nav>
+            <ul class="pagination">
+            </ul>
+        </nav>
+    </div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        getPagination('#tagInfo');
+    });
+</script>

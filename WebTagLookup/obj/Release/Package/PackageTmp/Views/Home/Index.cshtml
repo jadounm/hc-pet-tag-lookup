@@ -1,0 +1,47 @@
+﻿@model WebTagLookup.Models.TagLookup
+
+@{
+    ViewBag.Title = "Pet License Information Database";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Pet License Information Database</h3>
+        <p>To find lost pet owner information, please search by license number or microchip number.</p>
+        <p>If your search does not return any results, please contact Pet Resources at (813)744-5660.</p>
+        <p>Search Requirements:</p>
+        <ul>
+            <li><b>License</b>: search string must be at least 6 characters long</li>
+            <li><b>Microchip</b>: search string must be at least 9 characters long</li>
+        </ul>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+@using (Ajax.BeginForm("TagSearch", "Home", null, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultArea" }, new { @class = "form-inline" }))
+{
+        <div class="form-group">
+            @Html.LabelFor(m => m.license, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.license, new { @class = "form-control", placeholder = "License #" })
+            @Html.ValidationMessageFor(m => m.license)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.micro, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.micro, new { @class = "form-control", placeholder = "Microchip #" })
+            @Html.ValidationMessageFor(m => m.micro)
+        </div>
+    
+        <button class="btn btn-default" name="btnSubmit" id="btnSubmit">Submit</button>
+}
+    </div>
+</div>
+
+<hr />
+
+<div class="row ">
+    <div class="col-md-12">
+        <div id="resultArea" class="table-responsive"></div>
+    </div>
+</div>
