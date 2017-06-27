@@ -8,7 +8,7 @@ using WebTagLookup.Models;
 
 namespace WebTagLookup.Controllers.Api
 {
-	[Route("api/[controller]")]
+	//[Route("api/[controller]")]
 	// [EnableCors("AllowSpecificOrigins")]
 	public class ApiAnimalsController : Controller
 	{
@@ -21,7 +21,7 @@ namespace WebTagLookup.Controllers.Api
 		}
 		
 		// Get /api/search/:term?page=1
-		[HttpGet]
+		[HttpGet("/api/search/{term}")]
 		public IEnumerable<TagData> Search(string term=null, int page=1)
 		{
 			if (!term) {
